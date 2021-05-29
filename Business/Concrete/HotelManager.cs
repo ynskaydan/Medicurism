@@ -1,48 +1,48 @@
-﻿using Business.Abstract;
-using Core.Utilities.Results.Abstract;
-using Entities.Concrete;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.Abstract;
+using Core.Utilities.Results.Abstract;
 using DataAccess.Abstract;
+using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class DoctorManager : IDoctorService
+    public class HotelManager:IHotelService
     {
-        IDoctorDal _doctorDal;
+        IHotelDal _hotelDal;
 
-        public DoctorManager(IDoctorDal doctorDal)
+        public HotelManager(IHotelDal hotelDal)
         {
-            _doctorDal = doctorDal;
+            _hotelDal = hotelDal;
         }
 
-        public IResult Add(Doctor entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IResult Delete(Doctor entity)
+        public IResult Add(Hotel entity)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<List<Doctor>> GetAll()
+        public IResult Delete(Hotel entity)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<Doctor> GetDtos()
+        public IResult Update(Hotel entity)
         {
             throw new NotImplementedException();
         }
 
-        public IDataResult<Doctor> GetById(int id)
+        public IDataResult<List<Hotel>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IResult Update(Doctor entity)
+        public IDataResult<Hotel> GetDtos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<Hotel> GetById(int id)
         {
             throw new NotImplementedException();
         }

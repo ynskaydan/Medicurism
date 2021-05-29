@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.DataAccess.EntityFramework;
+using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    class EfDoctorDal
+    public class EfDoctorDal:EfEntityRepositoryBase<Doctor,MedicurismContext>
     {
     }
 }

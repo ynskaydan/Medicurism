@@ -6,6 +6,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.Constants;
 
 namespace Business.Concrete
 {
@@ -21,7 +22,7 @@ namespace Business.Concrete
         public IResult Add(Branch entity)
         {
             _branchDal.Add(entity);
-            return new SuccessResult(addedMessage);
+            return new SuccessResult(Messages<Branch>.Added);
         }
 
         public IResult Delete(Branch entity)
@@ -29,12 +30,17 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<Branch> GetAll()
+        public IDataResult<List<Branch>> GetAll()
         {
             throw new NotImplementedException();
         }
 
         public IDataResult<Branch> GetDtos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<Branch> GetById(int id)
         {
             throw new NotImplementedException();
         }

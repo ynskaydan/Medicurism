@@ -11,7 +11,7 @@ namespace Entities.Concrete
         public string doctorName { get; set; }
         public string doctorSurname { get; set; }
         public string doctorEmail { get; set; }
-        public double doctorPoint { get; set; }
+        //public double doctorPoint { get; set; }
 
     }
 }

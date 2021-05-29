@@ -4,10 +4,13 @@ using System.Text;
 
 namespace Business.Constants
 {
-    public class Messages
+    public static class Messages<T>
     {
-        public String addedMessage = "You have successfully added!";
-        public String deletedMessage = "You have successfully deleted!";
-        public String updatedMessage = "You have successfully updated!";
+        public static string Added = typeof(T).Name + " Added!";
+        public static string Deleted = typeof(T).Name + " Deleted!";
+        public static string Updated = typeof(T).Name + " Updated!";
+        public static string Listed = typeof(T).Name + "s listed!";
+        public static string ListedDto = "All " + typeof(T).Name + " details listed!";
+
     }
 }

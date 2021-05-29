@@ -4,11 +4,19 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataAccess.Abstract;
 
 namespace Business.Concrete
 {
     public class HospitalManager : IHospitalService
     {
+        IHospitalDal _hospitalDal;
+
+        public HospitalManager(IHospitalDal hospitalDal)
+        {
+            _hospitalDal = hospitalDal;
+        }
+
         public IResult Add(Hospital entity)
         {
             throw new NotImplementedException();
@@ -19,12 +27,17 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<Hospital> GetAll()
+        public IDataResult<List<Hospital>> GetAll()
         {
             throw new NotImplementedException();
         }
 
         public IDataResult<Hospital> GetDtos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<Hospital> GetById(int id)
         {
             throw new NotImplementedException();
         }

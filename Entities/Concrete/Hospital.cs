@@ -9,7 +9,7 @@ namespace Entities.Concrete
     {
         public int hospitalId { get; set; }
         public string hospitalName { get; set; }
-        public string hospitalCity { get; set; }
-        public double hospitalPoint { get; set; }
+        public string cityId { get; set; }
+        //public double hospitalPoint { get; set; }
     }
 }

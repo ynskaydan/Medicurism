@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Core.DataAccess;
 using Entities.Concrete;
 
-namespace DataAccess.Abstract
+namespace Business.Abstract
 {
-    public interface IDoctorDal:IEntityRepository<Doctor>
+    public interface IAppointmentService:IEntityService<Appointment>
     {
     }
 }

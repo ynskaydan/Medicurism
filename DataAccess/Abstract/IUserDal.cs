@@ -6,7 +6,8 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface IHospitalDal:IEntityRepository<Hospital>
+    public interface IUserDal : IEntityRepository<User>
     {
+
     }
 }
