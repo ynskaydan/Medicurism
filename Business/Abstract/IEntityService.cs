@@ -11,7 +11,7 @@ namespace Business.Abstract
         IResult Delete(T entity);
         IResult Update(T entity);
         IDataResult<List<T>> GetAll();
-        IDataResult<T> GetDtos();
+        
         IDataResult<T> GetById(int id);
 
 

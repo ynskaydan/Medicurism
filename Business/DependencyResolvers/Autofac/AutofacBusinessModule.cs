@@ -6,7 +6,10 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.Utilities.Helpers;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Security;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 
@@ -30,6 +33,19 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<BranchManager>().As<IBranchService>();
             builder.RegisterType<EfBranchDal>().As<IBranchDal>();
+
+            builder.RegisterType<DoctorImageManager>().As<IDoctorImageService>();
+            builder.RegisterType<EfDoctorImageDal>().As<IDoctorImageDal>();
+
+            builder.RegisterType<HotelManager>().As<IHotelService>();
+            builder.RegisterType<EfHotelDal>().As<IHotelDal>();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+            //builder.RegisterType<FileHelper>().As<IHelper>();
+
+            //builder.RegisterType<EfUserImage>().As<IUserImageDal>();
+            //builder.RegisterType<UserImageManger>().As<IUserImageService>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

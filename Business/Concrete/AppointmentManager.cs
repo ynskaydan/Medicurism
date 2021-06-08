@@ -9,6 +9,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -44,9 +45,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Appointment>>(_appointmenDal.GetAll(), Messages<Appointment>.Listed);
         }
 
-        public IDataResult<Appointment> GetDtos()
+        public IDataResult<List<AppointmentDto>> GetDtos()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<AppointmentDto>>(_appointmenDal.GetAppointmentDtos(),
+                Messages<Appointment>.ListedDto);
         }
 
         public IDataResult<Appointment> GetById(int id)

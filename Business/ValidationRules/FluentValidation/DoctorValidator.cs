@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Entities.Concrete;
+using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    class DoctorValidator
+    public class DoctorValidator:AbstractValidator<Doctor>
     {
+        public DoctorValidator()
+        {
+            RuleFor(d => d.doctorId).NotEmpty();
+        }
     }
 }
