@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using Core.Entities.Concrete;
 using Entities.DTOs;
-
+using Core.Utilities.Results.Abstract;
 
 namespace WebAPI.Controllers
 {
@@ -44,10 +44,10 @@ namespace WebAPI.Controllers
         [HttpPost("register")]
         public IActionResult Register(UserForRegisterDto userForRegisterDto)
         {
-            var userExist = _authService.UserExist(userForRegisterDto.Email);
-            if (!userExist.Success)
+            IResult userToCheck = _authService.UserExist(userForRegisterDto.Email);
+            if (!userToCheck.Success)
             {
-                return BadRequest(userExist);
+                return BadRequest(userToCheck); 
             }
             var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
             var result = _authService.CreateAccessToken(registerResult.Data);

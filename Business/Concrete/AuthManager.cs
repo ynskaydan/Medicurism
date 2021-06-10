@@ -26,7 +26,7 @@ namespace Business.Concrete
 
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
-            var claims = _userService.GetClaims(user);
+            var claims = _userService.GetClaims(user).Data;
             var accessToken = _tokenHelper.CreateToken(user,claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages<User>.TokenCreated);
 
@@ -34,21 +34,33 @@ namespace Business.Concrete
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
-            var result = BusinessRules.Run(CheckUser(userForLoginDto.Email),CheckPasswordHash(userForLoginDto));
+            IResult result = BusinessRules.Run(CheckPasswordHash(userForLoginDto));
             if (!result.Success)
             {
                 return new ErrorDataResult<User>(result.Message);
             }
 
-            return new SuccessDataResult<User>(CheckUser(userForLoginDto.Email).Data, Messages<User>.SuccessLogin);
+            return new SuccessDataResult<User>(GetUser(userForLoginDto.Email).Data, Messages<User>.SuccessLogin);
 
 
 
         }
 
+        private IDataResult<User> GetUser(string email)
+        {
+            var userToGet = _userService.GetByMail(email).Data;
+            return new SuccessDataResult<User>(_userService.GetByMail(email).Data);
+        }
+
         private IResult CheckPasswordHash(UserForLoginDto userForLoginDto)
         {
-            var userForCheck = _userService.GetByMail(userForLoginDto.Email);
+            //IResult result = BusinessRules.Run(CheckUser(userForLoginDto.Email));
+            //if (!result.Success)
+            //{
+            //    return new ErrorResult(result.Message);
+            //}
+
+            var userForCheck = GetUser(userForLoginDto.Email).Data;
             if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password,userForCheck.PasswordHash,userForCheck.PasswordSalt))
             {
                 return new ErrorResult(Messages<User>.PasswordNotVerified);
@@ -58,14 +70,14 @@ namespace Business.Concrete
 
         }
 
-        private IDataResult<User> CheckUser(string email)
+        private IResult CheckUser(string email)
         {
-            User userForCheck = _userService.GetByMail(email);
-            if (userForCheck == null)
+            User userToCheck = GetUser(email).Data;
+            if (userToCheck == null)
             {
-                return new ErrorDataResult<User>(Messages<User>.NotFound);
+                return new ErrorResult(Messages<User>.NotFound);
             }
-            return new SuccessDataResult<User>(userForCheck);
+            return new SuccessResult();
         }
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
@@ -92,7 +104,8 @@ namespace Business.Concrete
 
         public IResult UserExist(string email)
         {
-              if (_userService.GetByMail(email) != null)
+            var userToCheck = GetUser(email);
+            if (userToCheck != null)
             {
                 return new ErrorResult(Messages<User>.AlreadyExist);
             }
